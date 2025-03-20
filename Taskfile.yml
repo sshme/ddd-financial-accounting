@@ -1,0 +1,23 @@
+version: '3'
+
+tasks:
+  tidy:
+    cmds:
+      - go mod tidy
+    silent: true
+  wire:
+    cmds:
+      - wire ./...
+    silent: true
+  test:
+    cmds:
+      - go test ./... -cover
+    silent: true
+  run:
+    deps:
+      - tidy
+      - wire
+      - test
+    cmds:
+      - go run cmd/financial-accounting/main.go
+    silent: true
